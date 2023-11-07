@@ -36,8 +36,6 @@ class TestUserAgent:
         except json.decoder.JSONDecodeError:
             assert False, f"Response is not in JSON format. Response text is '{response.text}'"
 
-
-    # assert "User-Agent" in response.json(), "The 'User-Agent' is not in the response"
-        assert expected["platform"] == response_as_dict["platform"], "Value in field 'platform' not equal by 'User-Agent'"
-        assert expected["browser"] == response_as_dict["browser"], "Value in field 'browser' not equal by 'User-Agent'"
-        assert expected["device"] == response_as_dict["device"], "Value in field 'device' not equal by 'User-Agent'"
+        assert expected["platform"] == response_as_dict["platform"], f"Value in field 'platform' not equal by 'User-Agent' {user_agent_val}"
+        assert expected["browser"] == response_as_dict["browser"], f"Value in field 'browser' not equal by 'User-Agent' {user_agent_val}"
+        assert expected["device"] == response_as_dict["device"], f"Value in field 'device' not equal by 'User-Agent' {user_agent_val}"
