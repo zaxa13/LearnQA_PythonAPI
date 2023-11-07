@@ -1,11 +1,15 @@
 from lib.my_requests import MyRequests
 from lib.base_case import BaseCase
 from lib.assertions import Assertions
+import allure
+from allure_commons.types import Severity
 
-
+@allure.epic("Edit_user_cases")
 class TestUserEdit(BaseCase):
 
     # REGISTER
+    @allure.id(1)
+    @allure.severity(Severity.BLOCKER)
     def test_edit_just_created_user(self):
         register_data = self.prepared_data()
         response1 = MyRequests.post("/user/", data=register_data)
@@ -55,6 +59,8 @@ class TestUserEdit(BaseCase):
         )
 
     # Попытка изменить данные пользователя, будучи неавторизованными
+    @allure.id(2)
+    @allure.severity(Severity.BLOCKER)
     def test_user_edit_not_auth(self):  # EX17task1
         data = self.prepared_data()
         response = MyRequests.post("/user/", data=data)
@@ -70,6 +76,8 @@ class TestUserEdit(BaseCase):
             f"Unexpected response content - '{response2.content}'"
 
     #
+    @allure.id(3)
+    @allure.severity(Severity.BLOCKER)
     def test_user_edit_auth_other_auth_data(self):  # EX17task2
         # REGISTER
         register_data = self.prepared_data()
@@ -114,7 +122,8 @@ class TestUserEdit(BaseCase):
         #Здесь есть логическая ошибка, тест падает, т.к авторизованные куки и userID н совпадают,
         # то ответ от сервера должен прийти status_code == 403
 
-
+    @allure.id(4)
+    @allure.severity(Severity.BLOCKER)
     def test_user_edit_auth_incorrect_email(self):  # EX17task3
         # REGISTER
         data = self.prepared_data()
@@ -162,7 +171,8 @@ class TestUserEdit(BaseCase):
             email,
             "Неверный email после редактирования")
 
-
+    @allure.id(5)
+    @allure.severity(Severity.BLOCKER)
     def test_user_name_edit_with_auth(self):  # EX17task4
         # REGISTER
         data = self.prepared_data()

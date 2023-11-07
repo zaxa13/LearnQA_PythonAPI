@@ -1,6 +1,8 @@
 from lib.my_requests import MyRequests
 from lib.base_case import BaseCase
 from lib.assertions import Assertions
+import allure
+from allure_commons.types import Severity
 
 
 #Ex18, task1

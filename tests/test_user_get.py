@@ -1,11 +1,15 @@
 from lib.assertions import Assertions
 from lib.base_case import BaseCase
 from lib.my_requests import MyRequests
+import allure
+from allure_commons.types import Severity
 
-
+@allure.epic("Get_user_cases")
 class TestUserGet(BaseCase):
 
     # Попытка получить данные пользователя будучи не авторизованным
+    @allure.severity(Severity.BLOCKER)
+    @allure.id(1)
     def test_get_user_info_not_auth(self):
         response = MyRequests.get("/user/2")
 
@@ -14,6 +18,8 @@ class TestUserGet(BaseCase):
         Assertions.assert_json_has_not_key(response, "lastName")
         Assertions.assert_json_has_not_key(response, "email")
 
+    @allure.severity(Severity.BLOCKER)
+    @allure.id(2)
     def test_get_user_details_auth_as_same_User(self):
         data = {"email": "vinkotov@example.com",
                 "password": "1234"}
@@ -42,6 +48,8 @@ class TestUserGet(BaseCase):
 
 
     #Просмотр данных пользователя с чужим user_ID
+    @allure.severity(Severity.CRITICAL)
+    @allure.id(3)
     def test_get_user_info_another_data(self):
         #REGISTER
         data = self.prepared_data()
