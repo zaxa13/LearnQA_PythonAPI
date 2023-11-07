@@ -121,6 +121,7 @@ class TestUserDelete(BaseCase):
             cookies={"auth_sid": auth_sid},
             headers={"x-csrf-token": token}
         )
+
         params = [
             "username",
             "firstName",

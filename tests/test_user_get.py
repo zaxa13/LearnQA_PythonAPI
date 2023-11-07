@@ -62,6 +62,7 @@ class TestUserGet(BaseCase):
         self.token = self.get_header(response1, "x-csrf-token")
 
 
+
         #Получение данных с чужим user_ID
         response2 = MyRequests.get(f"/user/{user_id}",
                                    cookies={"auth_sid": self.auth_sid},

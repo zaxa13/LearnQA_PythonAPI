@@ -31,6 +31,7 @@ class TestUserAuth(BaseCase):
             "user id from check metod"
         )
 
+
     @pytest.mark.parametrize('condition', exclude_params)
     def test_negative_auth_user(self, condition):
         if condition == 'no_cookie':

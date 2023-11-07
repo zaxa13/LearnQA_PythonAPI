@@ -114,6 +114,7 @@ class TestUserEdit(BaseCase):
         #Здесь есть логическая ошибка, тест падает, т.к авторизованные куки и userID н совпадают,
         # то ответ от сервера должен прийти status_code == 403
 
+
     def test_user_edit_auth_incorrect_email(self):  # EX17task3
         # REGISTER
         data = self.prepared_data()

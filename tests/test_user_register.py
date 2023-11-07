@@ -84,3 +84,4 @@ class TestUserRegister(BaseCase):
         Assertions.assert_status_code(response, 400)
         assert response.content.decode("utf-8") == "The value of 'username' field is too long", \
             f"The user should not register with this name - '{user_name}'"
+

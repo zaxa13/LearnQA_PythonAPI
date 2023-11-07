@@ -50,6 +50,7 @@ class Assertions:
 
 
 
+
     @staticmethod
     def assert_status_code(response: Response, value):
         assert response.status_code == value, f"Unexpected status code! Expected {value}. Actual {response.status_code}"

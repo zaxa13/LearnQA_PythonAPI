@@ -10,6 +10,7 @@ class MyRequests:
     def post(url: str, data: dict = None, headers: dict = None, cookies: dict = None):
         return MyRequests._send(url, data, headers, cookies, "POST")
 
+
     @staticmethod
     def put(url: str, data: dict = None, headers: dict = None, cookies: dict = None):
         return MyRequests._send(url, data, headers, cookies, "PUT")
