@@ -79,48 +79,48 @@ class TestUserEdit(BaseCase):
     @allure.id(3)
     @allure.severity(Severity.BLOCKER)
     def test_user_edit_auth_other_auth_data(self):  # EX17task2
-        # REGISTER
+        # REGISTER1
         register_data = self.prepared_data()
         response1 = MyRequests.post("/user/", data=register_data)
-
-        Assertions.assert_status_code(response1, 200)
-        Assertions.assert_json_has_key(response1, "id")
-
         user_id = self.get_json_value(response1, "id")
         email = register_data["email"]
         password = register_data["password"]
 
+        Assertions.assert_status_code(response1, 200)
+        Assertions.assert_json_has_key(response1, "id")
+
+
         # REGISTER2
         register_data2 = self.prepared_data()
         response2 = MyRequests.post("/user/", data=register_data2)
+        user_id2 = self.get_json_value(response2, "id")
 
         Assertions.assert_status_code(response2, 200)
         Assertions.assert_json_has_key(response2, "id")
 
-        user_id2 = self.get_json_value(response2, "id")
 
-        # LOGIN
+        #LOGIN
         login_data = {
             "email": email,
             "password": password
         }
 
-        response2 = MyRequests.post("/user/login", data=login_data)
+        response3 = MyRequests.post("/user/login", data=login_data)
         Assertions.assert_status_code(response2, 200)
-        auth_sid = self.get_cookie(response2, "auth_sid")
-        token = self.get_header(response2, "x-csrf-token")
+        auth_sid = self.get_cookie(response3, "auth_sid")
+        token = self.get_header(response3, "x-csrf-token")
 
         # EDIT
         new_name = "Changed name"
-        response3 = MyRequests.put(
+        response4 = MyRequests.put(
             f"/user/{user_id2}",
             cookies={"auth_sid": auth_sid},
             headers={"x-csrf-token": token},
             data={"firstName": new_name})
 
-        Assertions.assert_status_code(response3, 403)
-        #Здесь есть логическая ошибка, тест падает, т.к авторизованные куки и userID н совпадают,
-        # то ответ от сервера должен прийти status_code == 403
+        Assertions.assert_status_code(response4, 403,)
+        #Здесь есть логическая ошибка, тест падает, т.к авторизованные куки и userID не совпадают,
+        # то ответ от сервера должен прийти status_code == 403, вместо status_code ==200
 
     @allure.id(4)
     @allure.severity(Severity.BLOCKER)
