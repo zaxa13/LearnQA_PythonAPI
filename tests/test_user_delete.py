@@ -6,7 +6,10 @@ from allure_commons.types import Severity
 
 
 #Ex18, task1
+@allure.epic("Delete_user_cases")
 class TestUserDelete(BaseCase):
+    @allure.severity(Severity.BLOCKER)
+    @allure.id(1)
     def test_delete_user_with_test_account(self):
         # Авторизация пользователя
         data = {"email": "vinkotov@example.com",
@@ -30,6 +33,8 @@ class TestUserDelete(BaseCase):
 
 
     # Ex18, task2
+    @allure.severity(Severity.BLOCKER)
+    @allure.id(2)
     def test_successful_user_delete(self):
 
         #REGISTER
@@ -75,6 +80,8 @@ class TestUserDelete(BaseCase):
 
 
     #Ex18, task3
+    @allure.severity(Severity.BLOCKER)
+    @allure.id(3)
     def test_negative_delete_user(self):
         #REGISTER_1
         register_data = self.prepared_data()
