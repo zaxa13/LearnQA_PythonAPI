@@ -119,7 +119,7 @@ class TestUserDelete(BaseCase):
                                       headers={"x-csrf-token": token},
                                       cookies={"auth_sid": auth_sid})
 
-        # Assertions.assert_status_code(response4, 403)
+        assert response4.status_code == 401, f"Wrong response code, expected error 401"
         # Здесь есть логическая ошибка, тест падает, т.к авторизованные куки и userID н совпадают,
         # то ответ от сервера должен прийти status_code == 401
 
@@ -129,8 +129,11 @@ class TestUserDelete(BaseCase):
             f"/user/{user_id}"
         )
 
-        Assertions.assert_status_code(response5, 200) #Допущена логическая ошибка, т.к в методе delete мы указали user_id и cookies от разных пользователей,
-        # то user от которого мы применяли cookies не должен был удалиться,
+        Assertions.assert_status_code(response5, 200)
+        # #Допущена логическая ошибка,
+        # т.к в методе delete мы указали user_id и cookies от разных пользователей,
+        # то user от которого мы применяли cookies не должен был удалиться
+
         Assertions.assert_json_has_key(response, "username")
         Assertions.assert_json_has_not_key(response, "firstName")
         Assertions.assert_json_has_not_key(response, "lastName")
