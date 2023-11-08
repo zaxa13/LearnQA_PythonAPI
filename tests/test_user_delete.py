@@ -119,7 +119,7 @@ class TestUserDelete(BaseCase):
                                       headers={"x-csrf-token": token},
                                       cookies={"auth_sid": auth_sid})
 
-        assert response4.status_code == 401, f"Wrong response code, expected error 401"
+        assert response4.status_code == 401, f"Wrong response code, expected error 401, actual {response4.status_code}"
         # Здесь есть логическая ошибка, тест падает, т.к авторизованные куки и userID н совпадают,
         # то ответ от сервера должен прийти status_code == 401
 

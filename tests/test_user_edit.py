@@ -118,7 +118,7 @@ class TestUserEdit(BaseCase):
             headers={"x-csrf-token": token},
             data={"firstName": new_name})
 
-        Assertions.assert_status_code(response4, 401,)
+        assert response4.status_code == 401, f"Wrong response code, expected error 401, actual {response4.status_code}"
         #Здесь есть логическая ошибка, тест падает, т.к авторизованные куки и userID не совпадают,
         # то ответ от сервера должен прийти status_code == 401, вместо status_code ==200
 
@@ -202,7 +202,7 @@ class TestUserEdit(BaseCase):
             data={"firstName": new_email})
 
         print(response2.status_code)
-        print(response2.content)
+        print(response2.text)
         Assertions.assert_status_code(response2, 400)
         assert response2.content.decode(
             "utf-8") == '{"error":"Too short value for field firstName"}', \
