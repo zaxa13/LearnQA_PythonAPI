@@ -129,9 +129,9 @@ class TestUserDelete(BaseCase):
             f"/user/{user_id}"
         )
 
-
-        print(response5.status_code)
-        print(response5.text)
-
         Assertions.assert_status_code(response5, 200) #Допущена логическая ошибка, т.к в методе delete мы указали user_id и cookies от разных пользователей,
         # то user от которого мы применяли cookies не должен был удалиться,
+        Assertions.assert_json_has_key(response, "username")
+        Assertions.assert_json_has_not_key(response, "firstName")
+        Assertions.assert_json_has_not_key(response, "lastName")
+        Assertions.assert_json_has_not_key(response, "email")
