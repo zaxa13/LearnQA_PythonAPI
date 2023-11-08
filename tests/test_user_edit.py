@@ -118,9 +118,9 @@ class TestUserEdit(BaseCase):
             headers={"x-csrf-token": token},
             data={"firstName": new_name})
 
-        Assertions.assert_status_code(response4, 403,)
+        Assertions.assert_status_code(response4, 401,)
         #Здесь есть логическая ошибка, тест падает, т.к авторизованные куки и userID не совпадают,
-        # то ответ от сервера должен прийти status_code == 403, вместо status_code ==200
+        # то ответ от сервера должен прийти status_code == 401, вместо status_code ==200
 
     @allure.id(4)
     @allure.severity(Severity.BLOCKER)
