@@ -128,7 +128,7 @@ class TestUserEdit(BaseCase):
         # REGISTER
         data = self.prepared_data()
         response = MyRequests.post("/user/", data=data)
-        user_id = response.json()["id"]
+        user_id = self.get_json_value(response, "id")
         email = data.get("email")
 
         Assertions.assert_status_code(response, 200)
